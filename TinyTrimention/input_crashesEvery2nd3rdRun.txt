@@ -1,0 +1,57 @@
+Shall we play a game?
+
+Are there 2 or 3 players?2
+Player #1
+Which vertex would you like to place a pip on? (or enter 99 to pass) 15
+available, let's play a pip:
+setting occupier to current player
+player#1: 30
+player#2: 30
+Player #2
+Which vertex would you like to place a pip on? (or enter 99 to pass) 13
+available, let's play a pip:
+setting occupier to current player
+player#1: 30
+player#2: 30
+Player #1
+Which vertex would you like to place a pip on? (or enter 99 to pass) 1
+available, let's play a pip:
+setting occupier to current player
+player#1: 30
+player#2: 30
+Player #2
+Which vertex would you like to place a pip on? (or enter 99 to pass) 12
+available, let's play a pip:
+setting occupier to current player
+player#1: 30
+player#2: 30
+Player #1
+Which vertex would you like to place a pip on? (or enter 99 to pass) 19
+available, let's play a pip:
+setting occupier to current player
+triX array of vertex 14 incremented at index of player# 1
+triX array of vertex 7 incremented at index of player# 1
+triX array of vertex 4 incremented at index of player# 1
+triX array of vertex 18 incremented at index of player# 1
+triX array of vertex 17 incremented at index of player# 1
+triX array of vertex 16 incremented at index of player# 1
+triX array of vertex 13 incremented at index of player# 1
+triX array of vertex 12 incremented at index of player# 1
+triX array of vertex 11 incremented at index of player# 1
+triX array of vertex 5 incremented at index of player# 1
+triX array of vertex 3 incremented at index of player# 1
+triX array of vertex 2 incremented at index of player# 1
+triX array of vertex 9 incremented at index of player# 1
+triX array of vertex 8 incremented at index of player# 1
+triX array of vertex 6 incremented at index of player# 1
+triX array of vertex 10 incremented at index of player# 1
+deleting vertex: 13
+player #2 pipCount was: 30
+player #2pipCount is now: 29
+deleting vertex: 12
+player #2 pipCount was: 29
+player #2pipCount is now: 28
+player#1: 30
+player#2: 28
+Player #2
+Which vertex would you like to place a pip on? (or enter 99 to pass)
