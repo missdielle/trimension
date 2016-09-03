@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const int BOARDSIZE = 37;
+const int BOARDSIZE = 37;//fixed
 
 class Board {
 private:
