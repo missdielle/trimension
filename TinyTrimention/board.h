@@ -9,7 +9,7 @@
 
 using namespace std;
 
-const int BOARDSIZE = 37;//fixed
+const int BOARDSIZE = 37;//fixed the new branch
 
 class Board {
 private:
