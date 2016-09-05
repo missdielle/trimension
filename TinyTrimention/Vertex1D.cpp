@@ -100,20 +100,20 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'y':
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->kPrev);
-			triV.push_back(inPlayV->yNext);
-			triV.push_back(inPlayV->yNext->yNext);
+			triV.push_back(inPlayV->yPrev);
+			triV.push_back(inPlayV->yPrev->yPrev);
 			break;
 		case 'b':
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->kPrev);
-			triV.push_back(inPlayV->bNext);
-			triV.push_back(inPlayV->bNext->bNext);
+			triV.push_back(inPlayV->bPrev);
+			triV.push_back(inPlayV->bPrev->bPrev);
 			break;
 		case 'r':
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->kPrev);
-			triV.push_back(inPlayV->rNext);
-			triV.push_back(inPlayV->rNext->bNext);
+			triV.push_back(inPlayV->rPrev);
+			triV.push_back(inPlayV->rPrev->rPrev);
 			break;
 		}
 	}

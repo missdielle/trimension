@@ -13,8 +13,6 @@ const int BOARDSIZE = 37;//fixed the new branch
 
 class Board {
 private:
-//	Board *singleBoard;//this just adds confusion
-//don't think I need it, making topBoard in game class
 
 //following declares an array of Vertex pointers
 	Vertex **vertArray;
