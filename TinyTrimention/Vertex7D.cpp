@@ -367,14 +367,14 @@ vector<Vertex*> Vertex7D::findTriangles(Vertex*inPlayV, Player *player) {
 	case 'o':
 		//1st level secondary colors 
 		if (inPlayV->kPrev->kPrev->getOccupier() == player
-			&& inPlayV->gNext->gNext->getOccupier()) {
+			&& inPlayV->gNext->gNext->getOccupier() == player) {
 			triV.push_back(inPlayV->kPrev);
 			triV.push_back(inPlayV->yPrev);
 			triV.push_back(inPlayV->yPrev->yPrev);
 			triV.push_back(inPlayV->gNext);
 		}
 		if (inPlayV->kNext->kNext->getOccupier() == player
-			&& inPlayV->pPrev->pPrev->getOccupier()) {
+			&& inPlayV->pPrev->pPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->rPrev);
 			triV.push_back(inPlayV->rPrev->rPrev);
@@ -530,14 +530,14 @@ vector<Vertex*> Vertex7D::findTriangles(Vertex*inPlayV, Player *player) {
 	case 'p':
 		//1st level secondary 
 		if (inPlayV->kPrev->kPrev->getOccupier() == player
-			&& inPlayV->oNext->oNext->getOccupier()) {
+			&& inPlayV->oNext->oNext->getOccupier() == player) {
 			triV.push_back(inPlayV->kPrev);
 			triV.push_back(inPlayV->rPrev);
 			triV.push_back(inPlayV->rPrev->rPrev);
 			triV.push_back(inPlayV->oNext);
 		}
 		if (inPlayV->kNext->kNext->getOccupier() == player
-			&& inPlayV->gPrev->gPrev->getOccupier()) {
+			&& inPlayV->gPrev->gPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->bPrev);
 			triV.push_back(inPlayV->bPrev->bPrev);
@@ -693,14 +693,14 @@ vector<Vertex*> Vertex7D::findTriangles(Vertex*inPlayV, Player *player) {
 	case 'g':
 		//1st level secondary 
 		if (inPlayV->kPrev->kPrev->getOccupier() == player
-			&& inPlayV->pNext->pNext->getOccupier()) {
+			&& inPlayV->pNext->pNext->getOccupier() == player) {
 			triV.push_back(inPlayV->kPrev);
 			triV.push_back(inPlayV->bPrev);
 			triV.push_back(inPlayV->bPrev->bPrev);
 			triV.push_back(inPlayV->pNext);
 		}
 		if (inPlayV->kNext->kNext->getOccupier() == player
-			&& inPlayV->oPrev->oPrev->getOccupier()) {
+			&& inPlayV->oPrev->oPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->kNext);
 			triV.push_back(inPlayV->yPrev);
 			triV.push_back(inPlayV->yPrev->yPrev);

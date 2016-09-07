@@ -126,7 +126,7 @@ void Vertex::deleteTriangles(vector<Vertex*> myVector, Player*player){
 	for (vector<Vertex*>::iterator it = myVector.begin(); it != myVector.end(); it++) {
 		Vertex* tmp = *it;
 		tmp->triX[(player->number) - 1]--;
-		cout << "triX array of vertex " << triX[(player->number) - 1] 
+		cout << "triX array of vertex " << tmp->PIN 
 			<< " deccremented at index of player# " << player->number << endl;
 	}
 	return;
@@ -153,19 +153,16 @@ void Vertex::scorePip(Player*player, Vertex *ptr, bool defensive) {
 			}
 			else
 				player->addPip(player);
-			ptr->setOccupier(NULL);
+			
+			Player*tmpP = ptr->getOccupier();//holds occupier to delete any triangles
+			ptr->setOccupier(NULL);//here to prevent double scoring of burns and tri's
 
-			vector<Vertex*> tmpVector;	//holds all verticies inside new triangle
-			
-//************************NEEDS WORK:**************************************************
-			tmpVector = ptr->findTriangles(ptr, player);
-			//using player confuses function when deleting triangles after a burn
-			//because player is opponent of deleted pip that is deleting triangles
-			//using ptr->getOccupier() makes it decrement from vertex 0
-			
-			
-			
-			ptr->deleteTriangles(tmpVector, player);
+		//if deleted pip had triangles, we need to find and delete them
+			vector<Vertex*> tmpVector;	//holds all verticies found inside new triangle
+			tmpVector = ptr->findTriangles(ptr, tmpP);
+			ptr->deleteTriangles(tmpVector, tmpP);
+
+ 
 
 		return;
 	}

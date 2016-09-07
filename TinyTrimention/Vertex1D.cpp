@@ -224,18 +224,18 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'b':
 	//middle line
 			tmpV = inPlayV->bPrev;
-			while (tmpV != inPlayV->bPrev->bPrev->bPrev->bPrev->bPrev->bPrev) {
+			while (tmpV != inPlayV->bPrev->bPrev->bPrev->bPrev->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
 	//side lines
 			tmpV = inPlayV->kPrev->kPrev->bPrev;
-			while (tmpV != inPlayV->kPrev->kPrev->bPrev->bPrev->bPrev->bPrev) {
+			while (tmpV != inPlayV->kPrev->kPrev->bPrev->bPrev->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
 			tmpV = inPlayV->kNext->kNext->bPrev;
-			while (tmpV != inPlayV->kNext->kNext->bPrev->bPrev->bPrev->bPrev) {
+			while (tmpV != inPlayV->kNext->kNext->bPrev->bPrev->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
@@ -244,7 +244,7 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 			triV.push_back(inPlayV->kPrev->kPrev->kPrev->kPrev->bPrev->bPrev);
 			triV.push_back(inPlayV->kNext->kNext->kNext->kNext->bPrev);
 			triV.push_back(inPlayV->kNext->kNext->kNext->kNext->bPrev->bPrev);
-			break;
+
 	//misc
 			triV.push_back(inPlayV->kPrev->kPrev->pNext);
 			triV.push_back(inPlayV->kPrev->kPrev->kPrev->kPrev->pNext);
@@ -256,18 +256,18 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'r':
 	//middle line
 			tmpV = inPlayV->rPrev;
-			while (tmpV != inPlayV->rPrev->rPrev->rPrev->rPrev->rPrev->rPrev) {
+			while (tmpV != inPlayV->rPrev->rPrev->rPrev->rPrev->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}
 	//side lines
 			tmpV = inPlayV->kPrev->kPrev->rPrev;
-			while (tmpV != inPlayV->kPrev->kPrev->rPrev->rPrev->rPrev->rPrev) {
+			while (tmpV != inPlayV->kPrev->kPrev->rPrev->rPrev->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}
 			tmpV = inPlayV->kNext->kNext->rPrev;
-			while (tmpV != inPlayV->kNext->kNext->rPrev->rPrev->rPrev->rPrev) {
+			while (tmpV != inPlayV->kNext->kNext->rPrev->rPrev->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}
@@ -288,18 +288,18 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'y':
 	//middle line
 			tmpV = inPlayV->yPrev;
-			while (tmpV != inPlayV->yPrev->yPrev->yPrev->yPrev->yPrev->yPrev) {
+			while (tmpV != inPlayV->yPrev->yPrev->yPrev->yPrev->yPrev->yPrev->yPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->yPrev;
 			}
 	//side lines
 			tmpV = inPlayV->kPrev->kPrev->yPrev;
-			while (tmpV != inPlayV->kPrev->kPrev->yPrev->yPrev->yPrev->yPrev) {
+			while (tmpV != inPlayV->kPrev->kPrev->yPrev->yPrev->yPrev->yPrev->yPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->yPrev;
 			}
 			tmpV = inPlayV->kNext->kNext->yPrev;
-			while (tmpV != inPlayV->kNext->kNext->yPrev->yPrev->yPrev->yPrev) {
+			while (tmpV != inPlayV->kNext->kNext->yPrev->yPrev->yPrev->yPrev->yPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->yPrev;
 			}
