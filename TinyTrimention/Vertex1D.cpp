@@ -28,7 +28,6 @@ Vertex1D::Vertex1D(Vertex& vertex){
 	
 }
 
-//all functions here done 
 
 bool Vertex1D::isBurned(Vertex *inPlayV, Player *player){
 	bool result = false;
@@ -137,18 +136,18 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'b':
 	//middle line
 			tmpV = inPlayV->bPrev;
-			while (tmpV != inPlayV->bPrev->bPrev->bPrev->bPrev) {
+			while (tmpV != inPlayV->bPrev->bPrev->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
 	//side lines
 			tmpV = inPlayV->kPrev->kPrev->bPrev;
-			while (tmpV != inPlayV->kPrev->kPrev->bPrev->bPrev) {
+			while (tmpV != inPlayV->kPrev->kPrev->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
 			tmpV = inPlayV->kNext->kNext->bPrev;
-			while (tmpV != inPlayV->kNext->kNext->bPrev->bPrev) {
+			while (tmpV != inPlayV->kNext->kNext->bPrev->bPrev->bPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->bPrev;
 			}
@@ -160,18 +159,18 @@ vector<Vertex*> Vertex1D::findTriangles(Vertex*inPlayV, Player *player) {
 		case 'r':
 	//middle line
 			tmpV = inPlayV->rPrev;
-			while (tmpV != inPlayV->rPrev->rPrev->rPrev->rPrev) {
+			while (tmpV != inPlayV->rPrev->rPrev->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}
 	//side lines
 			tmpV = inPlayV->kPrev->kPrev->rPrev;
-			while (tmpV != inPlayV->kPrev->kPrev->rPrev->rPrev) {
+			while (tmpV != inPlayV->kPrev->kPrev->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}
 			tmpV = inPlayV->kNext->kNext->rPrev;
-			while (tmpV != inPlayV->kNext->kNext->rPrev->rPrev) {
+			while (tmpV != inPlayV->kNext->kNext->rPrev->rPrev->rPrev) {
 				triV.push_back(tmpV);
 				tmpV = tmpV->rPrev;
 			}

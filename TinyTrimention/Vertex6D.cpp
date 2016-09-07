@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Vertex6D.h"
+ #include "Vertex6D.h"
 
 Vertex6D::Vertex6D() : Vertex() {}
 Vertex6D::Vertex6D(int PIN, int xCoord, int yCoord,
@@ -77,7 +77,7 @@ void Vertex6D::deleteBurns(Vertex *inPlayV, Player *player, bool defensive) {
 //12 degree doesn't need "||" since inside burns are lower down
 //ifs lower down are inside burns that don't depend on degree
 
-//outside legs burning shallow neighbors
+//outside legs burning shallow neighbors*********************need conditon for up or down pointing 6D
 	if (inPlayV->rNext->getOccupier() == player) {
 		switch (inPlayV->rNext->getDegrees()) {
 		case 1:
@@ -187,53 +187,101 @@ void Vertex6D::deleteBurns(Vertex *inPlayV, Player *player, bool defensive) {
 		}
 	}
 
-
+	//This does below but only one direction
 //outside legs burning acute neighbors
 //again, don't need "||" since inside burns are lower down
-	if (inPlayV->rPrev->getOccupier() == player) {
-		if (inPlayV->rPrev->getDegrees() == 4) {
-			if (inPlayV->rPrev->rPrev->getOccupier() == player
-//				|| inPlayV->bPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->yNext, defensive);
-			}
-			if (inPlayV->rPrev->rPrev->getOccupier() == player
-//				|| inPlayV->yPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->bNext, defensive);
-			}
+//	if (inPlayV->rPrev->getOccupier() == player) {
+//		if (inPlayV->rPrev->getDegrees() == 4) {
+//			if (inPlayV->rPrev->rPrev->getOccupier() == player
+////				|| inPlayV->bPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->yNext, defensive);
+//			}
+//			if (inPlayV->rPrev->rPrev->getOccupier() == player
+////				|| inPlayV->yPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->bNext, defensive);
+//			}
+//		}
+//	}
+//	if (inPlayV->yPrev->getOccupier() == player) {
+//		if (inPlayV->yPrev->getDegrees() == 4) {
+//			if (inPlayV->yPrev->yPrev->getOccupier() == player
+////				|| inPlayV->bPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->rNext, defensive);
+//			}
+//			if (inPlayV->yPrev->yPrev->getOccupier() == player
+////				|| inPlayV->rPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->bNext, defensive);
+//			}
+//		}
+//	}
+//	if (inPlayV->bPrev->getOccupier() == player) {
+//		if (inPlayV->bPrev->getDegrees() == 4) {
+//			if (inPlayV->bPrev->bPrev->getOccupier() == player
+////				|| inPlayV->yPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->rNext, defensive);
+//			}
+//			if (inPlayV->bPrev->bPrev->getOccupier() == player
+////				|| inPlayV->rPrev->getOccupier() == player
+//				) {
+//				scorePip(player, inPlayV->yNext, defensive);
+//			}
+//		}
+//	}
+
+//three in a row on a primary line burns both sides
+	//outside condition for pointing towards prev(down) or next(up)
+//triangles pointing down
+	if (inPlayV->yNext->getDegrees() == 4 || 
+		inPlayV->yNext->getDegrees() == 3) {	//pointing down
+		if (inPlayV->yNext->yNext != NULL && 
+			inPlayV->yNext->getOccupier() == player &&
+			inPlayV->yNext->yNext->getOccupier() == player) {
+			scorePip(player, inPlayV->bPrev, defensive);
+			scorePip(player, inPlayV->rPrev, defensive);
 		}
-	}
-	if (inPlayV->yPrev->getOccupier() == player) {
-		if (inPlayV->yPrev->getDegrees() == 4) {
-			if (inPlayV->yPrev->yPrev->getOccupier() == player
-//				|| inPlayV->bPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->rNext, defensive);
-			}
-			if (inPlayV->yPrev->yPrev->getOccupier() == player
-//				|| inPlayV->rPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->bNext, defensive);
-			}
+		if (inPlayV->bNext->bNext != NULL && 
+			inPlayV->bNext->getOccupier() == player && 
+			inPlayV->bNext->bNext->getOccupier() == player) {
+			scorePip(player, inPlayV->rPrev, defensive);
+			scorePip(player, inPlayV->yPrev, defensive);
 		}
-	}
-	if (inPlayV->bPrev->getOccupier() == player) {
-		if (inPlayV->bPrev->getDegrees() == 4) {
-			if (inPlayV->bPrev->bPrev->getOccupier() == player
-//				|| inPlayV->yPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->rNext, defensive);
-			}
-			if (inPlayV->bPrev->bPrev->getOccupier() == player
-//				|| inPlayV->rPrev->getOccupier() == player
-				) {
-				scorePip(player, inPlayV->yNext, defensive);
-			}
+		if (inPlayV->rNext->rNext != NULL &&
+			inPlayV->rNext->getOccupier() == player &&
+			inPlayV->rNext->rNext->getOccupier() == player) {
+			scorePip(player, inPlayV->bPrev, defensive);
+			scorePip(player, inPlayV->yPrev, defensive);
 		}
 	}
 
-//inside burns of acute neighbors**********************************
+//triangles pointing up
+	if (inPlayV->yPrev->getDegrees() == 4
+		|| inPlayV->yPrev->getDegrees() == 3) {
+		if (inPlayV->yPrev->yPrev != NULL && 
+			inPlayV->yPrev->getOccupier() == player &&
+			inPlayV->yPrev->yPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->bNext, defensive);
+			scorePip(player, inPlayV->rNext, defensive);
+		}
+		if (inPlayV->bPrev->bPrev != NULL && 
+			inPlayV->bPrev->getOccupier() == player &&
+			inPlayV->bPrev->bPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->rNext, defensive);
+			scorePip(player, inPlayV->yNext, defensive);
+		}
+		if (inPlayV->rPrev->rPrev != NULL && 
+			inPlayV->rPrev->getOccupier() == player &&
+			inPlayV->rPrev->rPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->bNext, defensive);
+			scorePip(player, inPlayV->yNext, defensive);
+		}
+	}
+
+//inside burns of acute neighbors
 	if (inPlayV->yPrev->getOccupier() == player &&
 		inPlayV->rPrev->getOccupier() == player) {
 		scorePip(player, inPlayV->bNext, defensive);
@@ -265,24 +313,30 @@ void Vertex6D::deleteBurns(Vertex *inPlayV, Player *player, bool defensive) {
 	//if prime prev == 4 or 3  is upright triangle
 	//if prime next == 4 or 3  is downward triangle
 
-	if (inPlayV->rPrev->getDegrees() == 3 || inPlayV->rPrev->getDegrees() == 4) {
-		if (inPlayV->rPrev->rPrev != NULL && inPlayV->rPrev->rPrev->getOccupier() == player) {
+	if (inPlayV->rPrev->getDegrees() == 3 || 
+		inPlayV->rPrev->getDegrees() == 4) {
+		if (inPlayV->rPrev->rPrev != NULL && 
+			inPlayV->rPrev->rPrev->getOccupier() == player) {
 			if (inPlayV->yNext->getOccupier() == player
 				|| inPlayV->bNext->getOccupier() == player) {
 				scorePip(player, inPlayV->rPrev, defensive);
 			}
 		}
 	}
-	if (inPlayV->bPrev->getDegrees() == 3 || inPlayV->bPrev->getDegrees() == 4) {
-		if (inPlayV->bPrev->bPrev != NULL && inPlayV->bPrev->bPrev->getOccupier() == player) {
+	if (inPlayV->bPrev->getDegrees() == 3 || 
+		inPlayV->bPrev->getDegrees() == 4) {
+		if (inPlayV->bPrev->bPrev != NULL && 
+			inPlayV->bPrev->bPrev->getOccupier() == player) {
 			if (inPlayV->yNext->getOccupier() == player
 				|| inPlayV->rNext->getOccupier() == player) {
 				scorePip(player, inPlayV->bPrev, defensive);
 			}
 		}
 	}
-	if (inPlayV->yPrev->getDegrees() == 3 || inPlayV->yPrev->getDegrees() == 4) {
-		if (inPlayV->yPrev->yPrev != NULL && inPlayV->yPrev->yPrev->getOccupier() == player) {
+	if (inPlayV->yPrev->getDegrees() == 3 || 
+		inPlayV->yPrev->getDegrees() == 4) {
+		if (inPlayV->yPrev->yPrev != NULL && 
+			inPlayV->yPrev->yPrev->getOccupier() == player) {
 			if (inPlayV->rNext->getOccupier() == player
 				|| inPlayV->bNext->getOccupier() == player) {
 				scorePip(player, inPlayV->yPrev, defensive);
@@ -290,24 +344,30 @@ void Vertex6D::deleteBurns(Vertex *inPlayV, Player *player, bool defensive) {
 		}
 	}
 	
-	if (inPlayV->rNext->getDegrees() == 3 || inPlayV->rNext->getDegrees() == 4) {
-		if (inPlayV->rNext->rNext != NULL && inPlayV->rNext->rNext->getOccupier() == player) {
+	if (inPlayV->rNext->getDegrees() == 3 || 
+		inPlayV->rNext->getDegrees() == 4) {
+		if (inPlayV->rNext->rNext != NULL && 
+			inPlayV->rNext->rNext->getOccupier() == player) {
 			if (inPlayV->yPrev->getOccupier() == player
 				|| inPlayV->bPrev->getOccupier() == player) {
 				scorePip(player, inPlayV->rNext, defensive);
 			}
 		}
 	}
-	if (inPlayV->bNext->getDegrees() == 3 || inPlayV->bNext->getDegrees() == 4) {
-		if (inPlayV->bNext->bNext != NULL && inPlayV->bNext->bNext->getOccupier() == player) {
+	if (inPlayV->bNext->getDegrees() == 3 || 
+		inPlayV->bNext->getDegrees() == 4) {
+		if (inPlayV->bNext->bNext != NULL && 
+			inPlayV->bNext->bNext->getOccupier() == player) {
 			if (inPlayV->yPrev->getOccupier() == player
 				|| inPlayV->rPrev->getOccupier() == player) {
 				scorePip(player, inPlayV->bNext, defensive);
 			}
 		}
 	}
-	if (inPlayV->yNext->getDegrees() == 3 || inPlayV->yNext->getDegrees() == 4) {
-		if (inPlayV->yNext->yNext != NULL && inPlayV->yNext->yNext->getOccupier() == player) {
+	if (inPlayV->yNext->getDegrees() == 3 || 
+		inPlayV->yNext->getDegrees() == 4) {
+		if (inPlayV->yNext->yNext != NULL && 
+			inPlayV->yNext->yNext->getOccupier() == player) {
 			if (inPlayV->rPrev->getOccupier() == player
 				|| inPlayV->bPrev->getOccupier() == player) {
 				scorePip(player, inPlayV->yNext, defensive);

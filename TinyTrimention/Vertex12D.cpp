@@ -93,22 +93,142 @@ bool Vertex12D::isBurned(Vertex *inPlayV, Player *player){
 
 void Vertex12D::deleteBurns(Vertex *inPlayV,
 	Player *player, bool defensive) {
-	//make occupiers NULL
-	// ++/-- pipCounts of players
-	if (inPlayV->gPrev->getOccupier() == player
-		&& inPlayV->oNext->getOccupier() == player){
-		if (inPlayV->yNext->getOccupier() != player
-			&& inPlayV->yNext->getOccupier() != NULL){
-			if (defensive == false){
-				player->addPip(player);
-			}
-			else{
-				player->removePip(inPlayV->yNext->getOccupier());
-			}
-			inPlayV->yNext->setOccupier(NULL);
+	//short legs - secondary color
+	if (inPlayV->gPrev->getOccupier() == player) {
+		if (inPlayV->oNext->getOccupier() == player){
+			scorePip(player, inPlayV->yNext, defensive);
+		}
+		if (inPlayV->pPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->bNext, defensive);
+		}
+	}
+	if (inPlayV->pNext->getOccupier() == player) {
+		if (inPlayV->oPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->rNext, defensive);
+		}
+		if (inPlayV->gPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->bPrev, defensive);
+		}
+	}
+	if (inPlayV->oNext->getOccupier() == player) {
+		if (inPlayV->gPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->yNext, defensive);
+		}
+		if (inPlayV->pPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->rPrev, defensive);
+		}
+	}
+	//short legs - primary color
+	if (inPlayV->rPrev->getOccupier() == player) {
+		if (inPlayV->bNext->getOccupier() == player) {
+			scorePip(player, inPlayV->pPrev, defensive);
+		}
+		if (inPlayV->yNext->getOccupier() == player) {
+			scorePip(player, inPlayV->oNext, defensive);
+		}
+	}
+	if (inPlayV->bPrev->getOccupier() == player) {
+		if (inPlayV->yNext->getOccupier() == player) {
+			scorePip(player, inPlayV->gPrev, defensive);
+		}
+		if (inPlayV->rNext->getOccupier() == player) {
+			scorePip(player, inPlayV->pNext, defensive);
+		}
+	}
+	if (inPlayV->yPrev->getOccupier() == player) {
+		if (inPlayV->rNext->getOccupier() == player) {
+			scorePip(player, inPlayV->oPrev, defensive);
+		}
+		if (inPlayV->bNext->getOccupier() == player) {
+			scorePip(player, inPlayV->gNext, defensive);
+		}
+	}
+	//long legs - primary color
+	if (inPlayV->yPrev->getOccupier() == player) {
+		if (inPlayV->yPrev->rNext->getOccupier() == player) {
+			scorePip(player, inPlayV->oPrev, defensive);
+		}
+		if (inPlayV->yPrev->bNext->getOccupier() == player) {
+			scorePip(player, inPlayV->gNext, defensive);
+		}
+	}
+	if (inPlayV->rNext->getOccupier() == player) {
+		if (inPlayV->rNext->yPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->oPrev, defensive);
+		}
+		if (inPlayV->rNext->bPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->pNext, defensive);
+		}
+	}
+	if (inPlayV->bPrev->getOccupier() == player) {
+		if (inPlayV->bPrev->rNext->getOccupier() == player) {
+			scorePip(player, inPlayV->pNext, defensive);
+		}
+		if (inPlayV->bPrev->yNext->getOccupier() == player) {
+			scorePip(player, inPlayV->gPrev, defensive);
+		}
+	}
+	if (inPlayV->yNext->getOccupier() == player) {
+		if (inPlayV->yNext->bPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->gPrev, defensive);
+		}
+		if (inPlayV->yNext->rPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->oNext, defensive);
+		}
+	}
+	if (inPlayV->rPrev->getOccupier() == player) {
+		if (inPlayV->rPrev->yNext->getOccupier() == player) {
+			scorePip(player, inPlayV->oNext, defensive);
+		}
+		if (inPlayV->rPrev->bNext->getOccupier() == player) {
+			scorePip(player, inPlayV->pPrev, defensive);
+		}
+	}
+	if (inPlayV->bNext->getOccupier() == player) {
+		if (inPlayV->bNext->yPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->gNext, defensive);
+		}
+		if (inPlayV->bNext->rPrev->getOccupier() == player) {
+			scorePip(player, inPlayV->pPrev, defensive);
 		}
 	}
 
+	//long legs - primary color
+	//*************************************************
+	if (inPlayV->oNext->getOccupier() == player &&
+		inPlayV->oNext->oNext->getOccupier() == player) {
+		scorePip(player, inPlayV->rPrev, defensive);
+		scorePip(player, inPlayV->yNext, defensive);
+	}
+	if (inPlayV->gPrev->getOccupier() == player &&
+		inPlayV->gPrev->gPrev->getOccupier() == player) {
+		scorePip(player, inPlayV->yNext, player);
+		scorePip(player, inPlayV->bPrev, player);
+	}
+	if (inPlayV->pNext->getOccupier() == player &&
+		inPlayV->pNext->pNext->getOccupier() == player) {
+		scorePip(player, inPlayV->bPrev, player);
+		scorePip(player, inPlayV->rNext, player);
+	}
+	if (inPlayV->oPrev->getOccupier() == player &&
+		inPlayV->oPrev->oPrev->getOccupier() == player) {
+		scorePip(player, inPlayV->rNext, player);
+		scorePip(player, inPlayV->yPrev, player);
+	}
+	if (inPlayV->gNext->getOccupier() == player &&
+		inPlayV->gNext->gNext->getOccupier() == player) {
+		scorePip(player, inPlayV->yPrev, player);
+		scorePip(player, inPlayV->bNext, player);
+	}
+	if (inPlayV->pPrev->getOccupier() == player &&
+		inPlayV->pPrev->pPrev->getOccupier() == player) {
+		scorePip(player, inPlayV->bNext, player);
+		scorePip(player, inPlayV->rPrev, player);
+	}
+
+
+
+/*
 	if (inPlayV->yNext->getOccupier() == player
 		&& inPlayV->rPrev->getOccupier() == player){
 		if (inPlayV->oNext->getOccupier() != player
@@ -262,7 +382,7 @@ void Vertex12D::deleteBurns(Vertex *inPlayV,
 			inPlayV->gPrev->setOccupier(NULL);
 		}
 	}
-
+	*/
 			//check if it created any triangles
 			//Vertex::findTriangles(Vertex*,Player);
 			//if so, Vertex::deleteTriangles(player); 
