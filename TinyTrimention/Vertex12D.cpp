@@ -193,8 +193,7 @@ void Vertex12D::deleteBurns(Vertex *inPlayV,
 		}
 	}
 
-	//long legs - primary color
-	//*************************************************
+	//long legs - secondary color
 	if (inPlayV->oNext->getOccupier() == player &&
 		inPlayV->oNext->oNext->getOccupier() == player) {
 		scorePip(player, inPlayV->rPrev, defensive);

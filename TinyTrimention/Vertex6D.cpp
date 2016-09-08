@@ -483,9 +483,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 	}
 //around a 12D - 12 cases
 	else if (inPlayV->yNext->getDegrees() == 12) {
-		if (inPlayV->yNext->yNext->getOccupier() != NULL 
-			&& inPlayV->yNext->yNext->getOccupier() ==
-			inPlayV->bPrev->bPrev->bPrev->getOccupier()) {
+		if (inPlayV->yNext->yNext->getOccupier() == player &&
+			inPlayV->bPrev->bPrev->bPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->yNext->gPrev);
 			triV.push_back(inPlayV->yNext->bPrev);
 			triV.push_back(inPlayV->yNext->pNext);
@@ -493,9 +492,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->yNext->oPrev);
 			triV.push_back(inPlayV->yNext);
 		}
-		if (inPlayV->yNext->yNext->getOccupier() != NULL 
-			&& inPlayV->yNext->yNext->getOccupier() ==
-			inPlayV->rPrev->rPrev->rPrev->getOccupier()) {
+		if (inPlayV->yNext->yNext->getOccupier() == player &&
+			inPlayV->rPrev->rPrev->rPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->yNext->oNext);
 			triV.push_back(inPlayV->yNext->rPrev);
 			triV.push_back(inPlayV->yNext->pPrev);
@@ -506,9 +504,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 
 	}
 	else if (inPlayV->rNext->getDegrees() == 12) {
-		if (inPlayV->rNext->rNext->getOccupier() != NULL
-			&& inPlayV->rNext->rNext->getOccupier() ==
-			inPlayV->yPrev->yPrev->yPrev->getOccupier()) {
+		if (inPlayV->rNext->rNext->getOccupier() == player &&
+			inPlayV->yPrev->yPrev->yPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->rNext->pPrev);
 			triV.push_back(inPlayV->rNext->bNext);
 			triV.push_back(inPlayV->rNext->gNext);
@@ -516,9 +513,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->rNext->oPrev);
 			triV.push_back(inPlayV->rNext);
 		}
-		if (inPlayV->rNext->rNext->getOccupier() != NULL
-			&& inPlayV->rNext->rNext->getOccupier() ==
-			inPlayV->bPrev->bPrev->bPrev->getOccupier()) {
+		if (inPlayV->rNext->rNext->getOccupier() == player &&
+			inPlayV->bPrev->bPrev->bPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->rNext->oNext);
 			triV.push_back(inPlayV->rNext->yNext);
 			triV.push_back(inPlayV->rNext->gPrev);
@@ -529,9 +525,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 	}
 	
 	else if (inPlayV->bNext->getDegrees() == 12) {
-		if (inPlayV->bNext->bNext->getOccupier() != NULL 
-			&& inPlayV->bNext->bNext->getOccupier() ==
-			inPlayV->yPrev->yPrev->yPrev->getOccupier()) {
+		if (inPlayV->bNext->bNext->getOccupier() == player &&
+			inPlayV->yPrev->yPrev->yPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->bNext->pNext);
 			triV.push_back(inPlayV->bNext->rNext);
 			triV.push_back(inPlayV->bNext->oPrev);
@@ -539,9 +534,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->bNext->gNext);
 			triV.push_back(inPlayV->bNext);
 		}
-		if (inPlayV->bNext->bNext->getOccupier() != NULL
-			&& inPlayV->bNext->bNext->getOccupier() ==
-			inPlayV->rPrev->rPrev->rPrev->getOccupier()) {
+		if (inPlayV->bNext->bNext->getOccupier() == player &&
+			inPlayV->rPrev->rPrev->rPrev->getOccupier() == player) {
 			triV.push_back(inPlayV->bNext->gPrev);
 			triV.push_back(inPlayV->bNext->yNext);
 			triV.push_back(inPlayV->bNext->oNext);
@@ -552,9 +546,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 	}
 	
 	else if (inPlayV->yPrev->getDegrees() == 12) {
-		if (inPlayV->yPrev->yPrev->getOccupier() != NULL
-			&& inPlayV->yPrev->yPrev->getOccupier() ==
-			inPlayV->bNext->bNext->bNext->getOccupier()) {
+		if (inPlayV->yPrev->yPrev->getOccupier() == player &&
+			inPlayV->bNext->bNext->bNext->getOccupier() == player) {
 			triV.push_back(inPlayV->yPrev->oNext);
 			triV.push_back(inPlayV->yPrev->rPrev);
 			triV.push_back(inPlayV->yPrev->pPrev);
@@ -562,9 +555,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->yPrev->gNext);
 			triV.push_back(inPlayV->yPrev);
 		}
-		if (inPlayV->yPrev->yPrev->getOccupier() != NULL
-			&& inPlayV->yPrev->yPrev->getOccupier() ==
-			inPlayV->rNext->rNext->rNext->getOccupier()){
+		if (inPlayV->yPrev->yPrev->getOccupier() == player &&
+			inPlayV->rNext->rNext->rNext->getOccupier() == player){
 			triV.push_back(inPlayV->yPrev->gPrev);
 			triV.push_back(inPlayV->yPrev->bPrev);
 			triV.push_back(inPlayV->yPrev->pNext);
@@ -574,9 +566,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 		}
 	}
 	else if (inPlayV->rPrev->getDegrees() == 12) {
-		if (inPlayV->rPrev->rPrev->getOccupier() != NULL
-			&& inPlayV->rPrev->rPrev->getOccupier() ==
-			inPlayV->yNext->yNext->yNext->getOccupier()) {
+		if (inPlayV->rPrev->rPrev->getOccupier() == player &&
+			inPlayV->yNext->yNext->yNext->getOccupier() == player) {
 			triV.push_back(inPlayV->rPrev->oNext);
 			triV.push_back(inPlayV->rPrev->yNext);
 			triV.push_back(inPlayV->rPrev->gPrev);
@@ -584,9 +575,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->rPrev->pNext);
 			triV.push_back(inPlayV->rPrev);
 		}
-		if (inPlayV->rPrev->rPrev->getOccupier() != NULL
-			&& inPlayV->rPrev->rPrev->getOccupier() ==
-			inPlayV->bNext->bNext->bNext->getOccupier()) {
+		if (inPlayV->rPrev->rPrev->getOccupier() == player &&
+			inPlayV->bNext->bNext->bNext->getOccupier() == player) {
 			triV.push_back(inPlayV->rPrev->pPrev);
 			triV.push_back(inPlayV->rPrev->bNext);
 			triV.push_back(inPlayV->rPrev->gNext);
@@ -596,9 +586,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 		}
 	}
 	else if (inPlayV->bPrev->getDegrees() == 12) {
-		if (inPlayV->bPrev->bPrev->getOccupier() != NULL
-			&& inPlayV->bPrev->bPrev->getOccupier() ==
-			inPlayV->yNext->yNext->yNext->getOccupier()) {
+		if (inPlayV->bPrev->bPrev->getOccupier() == player &&
+			inPlayV->yNext->yNext->yNext->getOccupier() == player) {
 			triV.push_back(inPlayV->bPrev->pPrev);
 			triV.push_back(inPlayV->bPrev->rPrev);
 			triV.push_back(inPlayV->bPrev->oNext);
@@ -606,9 +595,8 @@ vector<Vertex*> Vertex6D::findTriangles(Vertex*inPlayV, Player *player){
 			triV.push_back(inPlayV->bPrev->gPrev);
 			triV.push_back(inPlayV->bPrev);
 		}
-		if (inPlayV->bPrev->bPrev->getOccupier() != NULL
-			&& inPlayV->bPrev->bPrev->getOccupier() ==
-			inPlayV->rNext->rNext->rNext->getOccupier()) {
+		if (inPlayV->bPrev->bPrev->getOccupier() == player &&
+			inPlayV->rNext->rNext->rNext->getOccupier() == player) {
 			triV.push_back(inPlayV->bPrev->gNext);
 			triV.push_back(inPlayV->bPrev->yPrev);
 			triV.push_back(inPlayV->bPrev->oPrev);
