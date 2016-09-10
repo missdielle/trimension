@@ -1,16 +1,16 @@
 #include "Player.h"
+#include "Game.h"
 #include <iostream>
 
 Player::Player(){
-	pipCount = 30; //defensive game as default
+	pipCount = 20; //defensive game as default
+	capturedCount = 0;
 }
 
 Player::Player(int number, bool defensive){
 	this->number = number;
-	if (defensive == true){
-		pipCount = 30;
-	} else
-		pipCount = 0; 
+		pipCount = 20;
+		capturedCount = 0;
 }
 
 Player::~Player(){
@@ -22,7 +22,7 @@ void Player::removePip(Player *player){
 		" pipCount was: " << player->pipCount << endl;
 	player->pipCount--;
 	cout << "player #" << player->number << 
-		"pipCount is now: " << player->pipCount << endl;
+		" pipCount is now: " << player->pipCount << endl;
 }
 
 void Player::addPip(Player *player){
@@ -41,3 +41,14 @@ int Player::getPipCount(Player*player){
 	return player->pipCount;
 }
 
+void Player::addCapturePip(Player *player) {
+	cout << "player #" << player->number <<
+		"capturedPipCount was: " << player->getCapturedPipCount(player) << endl;
+	player->capturedCount++;
+	cout << "player #" << player->number <<
+		"capturedPipCount is now: " << player->getCapturedPipCount(player) << endl;
+}
+
+int Player::getCapturedPipCount(Player*player) {
+	return player->capturedCount;
+}

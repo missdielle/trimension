@@ -4,6 +4,8 @@
 
 using namespace std;
 
+//int	MAXTURNS = 20;
+
 class Game {
 //	int playerCount;
 	int maxTurns;

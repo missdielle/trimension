@@ -5,8 +5,8 @@
 
 using namespace std;
 
-//const int BOARDSIZE = 7;//in Board.h
-int	MAXTURNS = 30;
+//const int BOARDSIZE = 37;//in Board.h
+//int	MAXTURNS = 20;//in main
 
  
 Game::Game(){
@@ -23,7 +23,7 @@ Game::~Game(){}
 Player Game::playGame(int playerCount, bool defensive){
 
 	Player *winner = NULL;	//function returns this
-	int maxTurns = MAXTURNS; 
+	int maxTurns = 20; 
 
 	playerArray[0] = new Player(1, defensive);//parenthesis declares PIN
 	playerArray[1] = new Player(2, defensive);//constructor initializes it
@@ -47,8 +47,6 @@ Player Game::playGame(int playerCount, bool defensive){
 				}
 				else //if (currentV != NULL) 
 				{
-//					vector<Vertex*> tmpTriV;
-
 					if (checkIfTaken(currentV, playerArray[i]) == true) {
 						cout << "sorry, that spot is unavailable, "
 							<< "please try again\n";
@@ -68,7 +66,97 @@ Player Game::playGame(int playerCount, bool defensive){
 		}
 	}
 
+	//check pipCount or capturedCount to determine winner
+	if (defensive == true) {
+		if (playerCount == 2) {
+			if (playerArray[0]->getPipCount(playerArray[0]) >
+				playerArray[1]->getPipCount(playerArray[1])) {
+				winner = playerArray[0];
+				cout << "The winner is: " << winner;
+			}
+			else if (playerArray[0]->getPipCount(playerArray[0]) <
+				playerArray[1]->getPipCount(playerArray[1])) {
+				winner = playerArray[1];
+				cout << "The winner is: " << winner;
+			}
+			else if (playerArray[0]->getPipCount(playerArray[0]) ==
+				playerArray[1]->getPipCount(playerArray[1])) {
+				cout << "The game is a tie.";
+			}
+		}
+		else if (playerCount == 3) {
+			if ((playerArray[0]->getPipCount(playerArray[0]) >
+				playerArray[1]->getPipCount(playerArray[1]) &&
+				playerArray[0]->getPipCount(playerArray[0]) >
+				playerArray[2]->getPipCount(playerArray[2]))){
+					winner = playerArray[0];
+					cout << "The winner is: " << winner;
+			}
+			else if ((playerArray[1]->getPipCount(playerArray[1]) >
+				playerArray[0]->getPipCount(playerArray[0]) &&
+				playerArray[1]->getPipCount(playerArray[1]) >
+				playerArray[2]->getPipCount(playerArray[2]))) {
+				winner = playerArray[1];
+				cout << "The winner is: " << winner;
+			}
+			else if ((playerArray[2]->getPipCount(playerArray[2]) >
+				playerArray[0]->getPipCount(playerArray[0]) &&
+				playerArray[2]->getPipCount(playerArray[2]) >
+				playerArray[1]->getPipCount(playerArray[1]))) {
+				winner = playerArray[2];
+				cout << "The winner is: " << winner;
+			}
+			else if (playerArray[0]->getPipCount(playerArray[0]) ==
+				playerArray[1]->getPipCount(playerArray[1])) {
+				cout << "Player 1 and Player 2 are tied for the win.";
+			}
+			else if (playerArray[1]->getPipCount(playerArray[1]) ==
+				playerArray[2]->getPipCount(playerArray[2])) {
+				cout << "Player 2 and Player 3 are tied for the win.";
+			}
+			else if (playerArray[0]->getPipCount(playerArray[0]) ==
+				playerArray[2]->getPipCount(playerArray[2])) {
+				cout << "Player 1 and Player 3 are tied for the win.";
+			}
+		}
+	}
+	else { //defensive == false, only possible for 3 players
+		if (playerArray[0]->getCapturedPipCount(playerArray[0]) >
+			playerArray[1]->getCapturedPipCount(playerArray[1]) &&
+			playerArray[0]->getCapturedPipCount(playerArray[0]) >
+			playerArray[2]->getCapturedPipCount(playerArray[2])) {
+			winner = playerArray[0];
+			cout << "The winner is: " << winner;
+		}
+		else if (playerArray[1]->getCapturedPipCount(playerArray[1]) >
+			playerArray[0]->getCapturedPipCount(playerArray[0]) &&
+			playerArray[1]->getCapturedPipCount(playerArray[1]) >
+			playerArray[2]->getCapturedPipCount(playerArray[2])) {
+			winner = playerArray[1];
+			cout << "The winner is: " << winner;
+		}
+		else if (playerArray[2]->getCapturedPipCount(playerArray[2]) >
+			playerArray[1]->getCapturedPipCount(playerArray[1]) &&
+			playerArray[2]->getCapturedPipCount(playerArray[2]) >
+			playerArray[0]->getCapturedPipCount(playerArray[0])) {
+			winner = playerArray[2];
+			cout << "The winner is: " << winner;
+		}
+		else if (playerArray[0]->getCapturedPipCount(playerArray[0]) ==
+			playerArray[1]->getCapturedPipCount(playerArray[1])) {
+			cout << "Player 1 and Player 2 are tied for the win.";
+		}
+		else if (playerArray[1]->getCapturedPipCount(playerArray[1]) ==
+			playerArray[2]->getCapturedPipCount(playerArray[2])) {
+			cout << "Player 2 and Player 3 are tied for the win.";
+		}
+		else if (playerArray[0]->getCapturedPipCount(playerArray[0]) ==
+			playerArray[2]->getCapturedPipCount(playerArray[2])) {
+			cout << "Player 1 and Player 3 are tied for the win.";
+		}
+	}
 
+	
 	return *winner;
 }
 

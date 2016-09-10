@@ -148,21 +148,16 @@ void Vertex::scoreTriPips(vector<Vertex*> myVector, Player*player, bool defensiv
 void Vertex::scorePip(Player*player, Vertex *ptr, bool defensive) {
 	if (ptr->getOccupier() != NULL && ptr->getOccupier() != player) {
 		cout << "deleting vertex: " << ptr->getPIN() << endl;
-			if (defensive == true) {
-				player->removePip(ptr->getOccupier());
-			}
-			else
-				player->addPip(player);
+		player->removePip(ptr->getOccupier());
+		player->addCapturePip(player);
 			
-			Player*tmpP = ptr->getOccupier();//holds occupier to delete any triangles
-			ptr->setOccupier(NULL);//here to prevent double scoring of burns and tri's
+		Player*tmpP = ptr->getOccupier();//holds occupier to delete any triangles
+		ptr->setOccupier(NULL);//here to prevent double scoring of burns and tri's
 
-		//if deleted pip had triangles, we need to find and delete them
-			vector<Vertex*> tmpVector;	//holds all verticies found inside new triangle
-			tmpVector = ptr->findTriangles(ptr, tmpP);
-			ptr->deleteTriangles(tmpVector, tmpP);
-
- 
+	//if deleted pip had triangles, we need to find and delete them
+		vector<Vertex*> tmpVector;	//holds all verticies found inside new triangle
+		tmpVector = ptr->findTriangles(ptr, tmpP);
+		ptr->deleteTriangles(tmpVector, tmpP);
 
 		return;
 	}

@@ -4,6 +4,7 @@
 #include "Game.h"
 
 using namespace std;
+int MAXTURNS = 20;
 
 int main(){
 
