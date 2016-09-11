@@ -6,7 +6,7 @@
 using namespace std;
 
 //const int BOARDSIZE = 37;//in Board.h
-//int	MAXTURNS = 20;//in main
+int MAXTURNS = 10;
 
  
 Game::Game(){
@@ -23,17 +23,13 @@ Game::~Game(){}
 Player Game::playGame(int playerCount, bool defensive){
 
 	Player *winner = NULL;	//function returns this
-	int maxTurns = 20; 
+	int maxTurns = MAXTURNS; 
 
 	playerArray[0] = new Player(1, defensive);//parenthesis declares PIN
 	playerArray[1] = new Player(2, defensive);//constructor initializes it
 	playerArray[2] = new Player(3, defensive);	//and makes pipCount=30
-
-	/*if (defensive == true){
-		for (int i = 0; i < playerCount; i++){
-			playerArray[i]->setPipCount(playerArray[i], 0);
-		}
-	}*/
+	
+	Player *tie = playerArray[0]; //returns for ties
 
 	for (int turn = 0; turn < maxTurns; turn++){	//loop thru turns
 		for (int i = 0; i < playerCount; i++){		//loop thru players
@@ -72,16 +68,17 @@ Player Game::playGame(int playerCount, bool defensive){
 			if (playerArray[0]->getPipCount(playerArray[0]) >
 				playerArray[1]->getPipCount(playerArray[1])) {
 				winner = playerArray[0];
-				cout << "The winner is: " << winner;
+				cout << "The winner is: Player # " << winner->number;
 			}
 			else if (playerArray[0]->getPipCount(playerArray[0]) <
 				playerArray[1]->getPipCount(playerArray[1])) {
 				winner = playerArray[1];
-				cout << "The winner is: " << winner;
+				cout << "The winner is: Player # " << winner->number;
 			}
 			else if (playerArray[0]->getPipCount(playerArray[0]) ==
 				playerArray[1]->getPipCount(playerArray[1])) {
 				cout << "The game is a tie.";
+				winner = tie;
 			}
 		}
 		else if (playerCount == 3) {
@@ -90,33 +87,47 @@ Player Game::playGame(int playerCount, bool defensive){
 				playerArray[0]->getPipCount(playerArray[0]) >
 				playerArray[2]->getPipCount(playerArray[2]))){
 					winner = playerArray[0];
-					cout << "The winner is: " << winner;
+					cout << "The winner is: Player # " << winner->number;
 			}
 			else if ((playerArray[1]->getPipCount(playerArray[1]) >
 				playerArray[0]->getPipCount(playerArray[0]) &&
 				playerArray[1]->getPipCount(playerArray[1]) >
 				playerArray[2]->getPipCount(playerArray[2]))) {
 				winner = playerArray[1];
-				cout << "The winner is: " << winner;
+				cout << "The winner is: Player # " << winner->number;
 			}
 			else if ((playerArray[2]->getPipCount(playerArray[2]) >
 				playerArray[0]->getPipCount(playerArray[0]) &&
 				playerArray[2]->getPipCount(playerArray[2]) >
 				playerArray[1]->getPipCount(playerArray[1]))) {
 				winner = playerArray[2];
-				cout << "The winner is: " << winner;
+				cout << "The winner is: Player # " << winner->number;
+			}
+			else if (playerArray[0]->getPipCount(playerArray[0]) ==
+				playerArray[1]->getPipCount(playerArray[1]) &&
+				playerArray[0]->getPipCount(playerArray[0]) ==
+				playerArray[2]->getPipCount(playerArray[2])) {
+				cout << "All three players have tied the game.";
+				winner = tie;
+
 			}
 			else if (playerArray[0]->getPipCount(playerArray[0]) ==
 				playerArray[1]->getPipCount(playerArray[1])) {
 				cout << "Player 1 and Player 2 are tied for the win.";
+				winner = tie;
+
 			}
 			else if (playerArray[1]->getPipCount(playerArray[1]) ==
 				playerArray[2]->getPipCount(playerArray[2])) {
 				cout << "Player 2 and Player 3 are tied for the win.";
+				winner = tie;
+
 			}
 			else if (playerArray[0]->getPipCount(playerArray[0]) ==
 				playerArray[2]->getPipCount(playerArray[2])) {
 				cout << "Player 1 and Player 3 are tied for the win.";
+				winner = tie;
+
 			}
 		}
 	}
@@ -126,36 +137,49 @@ Player Game::playGame(int playerCount, bool defensive){
 			playerArray[0]->getCapturedPipCount(playerArray[0]) >
 			playerArray[2]->getCapturedPipCount(playerArray[2])) {
 			winner = playerArray[0];
-			cout << "The winner is: " << winner;
+			cout << "The winner is: Player # " << winner->number;
 		}
 		else if (playerArray[1]->getCapturedPipCount(playerArray[1]) >
 			playerArray[0]->getCapturedPipCount(playerArray[0]) &&
 			playerArray[1]->getCapturedPipCount(playerArray[1]) >
 			playerArray[2]->getCapturedPipCount(playerArray[2])) {
 			winner = playerArray[1];
-			cout << "The winner is: " << winner;
+			cout << "The winner is: Player # " << winner->number;
 		}
 		else if (playerArray[2]->getCapturedPipCount(playerArray[2]) >
 			playerArray[1]->getCapturedPipCount(playerArray[1]) &&
 			playerArray[2]->getCapturedPipCount(playerArray[2]) >
 			playerArray[0]->getCapturedPipCount(playerArray[0])) {
 			winner = playerArray[2];
-			cout << "The winner is: " << winner;
+			cout << "The winner is: Player # " << winner->number;
+		}
+		else if (playerArray[0]->getCapturedPipCount(playerArray[0]) ==
+			playerArray[1]->getCapturedPipCount(playerArray[1]) &&
+			playerArray[0]->getCapturedPipCount(playerArray[0]) ==
+			playerArray[2]->getCapturedPipCount(playerArray[2])) {
+			cout << "All three players have tied the game.";
+			winner = tie;
+
 		}
 		else if (playerArray[0]->getCapturedPipCount(playerArray[0]) ==
 			playerArray[1]->getCapturedPipCount(playerArray[1])) {
 			cout << "Player 1 and Player 2 are tied for the win.";
+			winner = tie;
+
 		}
 		else if (playerArray[1]->getCapturedPipCount(playerArray[1]) ==
 			playerArray[2]->getCapturedPipCount(playerArray[2])) {
 			cout << "Player 2 and Player 3 are tied for the win.";
+			winner = tie;
+
 		}
 		else if (playerArray[0]->getCapturedPipCount(playerArray[0]) ==
 			playerArray[2]->getCapturedPipCount(playerArray[2])) {
 			cout << "Player 1 and Player 3 are tied for the win.";
+			winner = tie;
+
 		}
 	}
-
 	
 	return *winner;
 }
@@ -183,15 +207,21 @@ Vertex* Game::getInput(){
 	cin >> input;
 	cin.clear();
 	cin.ignore();
-
-	while (!input) {
-		cout << "I'm sorry, I didn't understand that.\n";
-		cout << "Which vertex would you like to place a pip on? (or enter 99 to pass)";
-		cin >> input;
-	}
 	if (input == 99) {
 		return NULL;
 	}
+
+	while (!input || input < 1 || input > 37) {
+		cout << "I'm sorry, I didn't understand that.\n";
+		cout << "Which vertex would you like to place a pip on? (or enter 99 to pass)";
+		cin >> input;
+		cin.clear();
+		cin.ignore();
+		if (input == 99) {
+			return NULL;
+		}
+	}
+	
 	//return threeBoardArray->getVertex(input);//uses [0] by default
 	return threeBoardArray[0].getVertex(input);
 }

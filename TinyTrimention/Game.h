@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//int	MAXTURNS = 20;
+//int MAXTURNS = 20;
 
 class Game {
 //	int playerCount;

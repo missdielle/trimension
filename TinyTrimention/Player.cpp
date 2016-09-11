@@ -2,14 +2,16 @@
 #include "Game.h"
 #include <iostream>
 
+int PIPCOUNT = 10;
+
 Player::Player(){
-	pipCount = 20; //defensive game as default
+	pipCount = PIPCOUNT; //defensive game as default
 	capturedCount = 0;
 }
 
 Player::Player(int number, bool defensive){
 	this->number = number;
-		pipCount = 20;
+		pipCount = PIPCOUNT;
 		capturedCount = 0;
 }
 
